@@ -6,20 +6,24 @@ This is a temporary script file.
 """
 
 #%%
+#Import data set
 import pandas as pd
-sale=pd.read_csv("F:\sales history dataset\sales.csv",encoding="utf-8")
+sale=pd.read_csv("F:\sales_history_dataset\sales.csv",encoding="utf-8")
 
-
+#%%
+#Separate data set
 import sqlite3
 con = sqlite3.connect(':memory:')
 sale.to_sql('sale',con)
 newTable = pd.read_sql_query("select transaction_total, transaction_created_utc from sale", con)
 newTable.head()
 
-
+#%%
+#Drawing a histogram，analyze data
 import  matplotlib.pyplot as plt
-plt.hist(newTable['transaction_total'], bins=500, normed=True)
+plt.hist(newTable['transaction_total'], bins=10, normed=True)
 newTable['transaction_total'].describe(include = 'all')
+
 #%%
 from sklearn.model_selection import train_test_split
 newTable.head()
@@ -33,8 +37,10 @@ newTable['transaction_created_utc']= pd.to_datetime(newTable['transaction_create
 type(newTable.transaction_created_utc[0])
 print(newTable.head(2))
 print(newTable.shape)
+
 #%%
 newTable = newTable.set_index('transaction_created_utc')# 将date设置为index
+
 #%%
 print(type(newTable))
 print(newTable.index)

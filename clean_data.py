@@ -27,3 +27,7 @@ df['transaction_total'].describe(include = 'all')
 #%%
 df.to_csv('sales_history_dataset.csv',index=True)
 #%%
+from sklearn.model_selection import train_test_split
+x = df['transaction_total']
+y = df.index
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2)

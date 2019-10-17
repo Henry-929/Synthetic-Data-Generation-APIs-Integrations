@@ -19,7 +19,7 @@ df = pd.read_csv('F:\sales_history_dataset\sales_history_dataset.csv',encoding="
 df.dtypes
 
 #%%
-df2 = df.set_index('DATE')
+df2 = df.set_index('DATE')  
 #%%
 sns.jointplot(x='DATE',y='transaction_total',data=df2)
 #%%
