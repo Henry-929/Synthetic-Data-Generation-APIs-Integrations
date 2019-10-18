@@ -38,7 +38,7 @@ plot_acf(data_diff).show()
 plot_pacf(data_diff).show()
 #%%
 #模型训练
-arima = ARIMA(df2, order=(2, 2, 3))
+arima = ARIMA(df2, order=(2, 2, 4))
 result = arima.fit(disp=False)
 print(result.aic, result.bic, result.hqic)
 
@@ -47,10 +47,10 @@ plt.plot(result.fittedvalues, color='red')
 plt.title('ARIMA RSS: %.4f' % sum(result.fittedvalues - data_diff['transaction_total']) ** 2)
 plt.show()
 #%%
-pred = result.predict('20190921', '20191010',dynamic=True,typ='levels')
+pred = result.predict('20190921', '20200301',dynamic=True,typ='levels')
 print(pred)
 #%%
-x = pd.date_range('20180831', '20191010')
+x = pd.date_range('20180831', '20200301')
 #%%
 plt.plot(x[:386], df2['transaction_total'])
 plt.plot(pred)
